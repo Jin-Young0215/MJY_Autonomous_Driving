@@ -42,7 +42,7 @@
 | `modules/flask_module.py` | 디버그용 MJPEG 스트리밍 서버(RGB / 전처리 / ROI+오버레이 3분할 뷰). 현재 `final_main.py`에서는 직접 연결되어 있지 않은 보조 모듈 |
 | `best.pt` | YOLO 가중치 파일 — 저장소에는 포함되어 있지 않으므로 `MODEL_PATH`가 가리키는 위치에 별도로 배치해야 함 |
 
-`.env` / `.env.example`은 이 폴더가 아니라 **저장소 루트**(`MJY_Autonomous_Driving/.env`)에 있다.
+`.env` / `.env.example`, `requirements.txt`는 이 폴더가 아니라 **저장소 루트**(`MJY_Autonomous_Driving/`)에 있다.
 `tx.py`, `final_main.py`는 `load_dotenv()`를 호출할 때 실행 파일 위치부터 상위 폴더로 올라가며 `.env`를 찾으므로,
 프로젝트 폴더 안에 없어도 루트의 `.env`를 정상적으로 읽는다. (git에는 `.env.example`만 커밋됨)
 
@@ -66,9 +66,10 @@
 
 1. 저장소 루트에 `.env` 준비 (`.env.example` 참고, 실제 IP/포트/모델 경로로 채움)
 2. 의존성 설치
+   - 저장소 루트의 `requirements.txt` 참고 (`pip install -r requirements.txt`)
    - 공통: `opencv-python`, `numpy`, `python-dotenv`
    - 노트북: `ultralytics` (YOLO)
-   - 라즈베리파이: `afb` (보드 전용 GPIO/카메라 라이브러리), 필요 시 `flask`
+   - 라즈베리파이: `afb` (보드 전용 GPIO/카메라 라이브러리, PyPI 미배포 → `repo(주최제공코드)/afb` 폴더를 직접 복사), 필요 시 `flask`
 3. **라즈베리파이에서 먼저** `final_main.py` 실행 → 결과 수신 서버가 대기 상태로 들어감
 4. **노트북에서** `tx.py` 실행 → 라즈베리파이 결과 서버로 접속 후, 프레임 수신 서버를 열고 대기
    (`final_main.py`의 프레임 송신 스레드는 연결 실패 시 2초 간격으로 재시도하므로 순서가 다소 어긋나도 자동 재연결됨)

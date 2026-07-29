@@ -1,0 +1,13 @@
+# 공통 (final_main.py + tx.py)
+opencv-python>=4.8
+numpy>=1.24
+python-dotenv>=1.0
+
+# 노트북 전용 (tx.py) - YOLO 추론
+ultralytics>=8.2
+
+# 라즈베리파이 전용 - 디버그 스트리밍(modules/flask_module.py) 사용 시에만 필요
+flask>=3.0
+
+# afb (보드 전용 GPIO/카메라 라이브러리)는 PyPI 패키지가 아님.
+# repo(주최제공코드)/afb 폴더를 라즈베리파이 실행 경로에 그대로 복사해서 사용할 것.
